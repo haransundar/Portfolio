@@ -1,0 +1,55 @@
+PROJECTS
+INTERNSHIPSSKILLS
+EDUCATION
+CONTACT
+CERTIFICATIONS
+ACHIEVEMENTSJava | Python | C
+Canva | Figma
+Frontend Technologies| YOLO |
+Tensorflow
+CrewAI | N8N | Langflow
+SQL  | AWS Cloud
+Leadership | Coordination Aspiring AI-agent developer and engineer skilled in RAG
+architectures, vector embeddings (Pinecone), conversational AI
+(ElevenLabs, Google Gemini), deep learning frameworks (YOLOv8,
+TensorFlow/PyTorch), and MLOps orchestration (n8n, Docker) for
+end-to-end deployment of intelligent agents and AI-powered
+applications.
+B.Tech AI&DS                             8.20(till 5 sem)th
+Kamaraj College of Engineering
+and Technology (2022-2026)
+P.K.N Matriculation Higher
+Secondary SchoolHSLC                                                       88.1%
+(2021-2022)
+haransundar536@gmail.com+91 89032 50793
+github.com/haransundar
+linkedin.com/in/haransundar
+Puliyankulam,MaduraiAmrita Vidyalayam Matriculation
+High SchoolSSLC                                                         87.2%
+(2019-2020)
+AWS: Cloud Practitioner
+InfosysSpringboard : AI  Fundamentals,
+       Java Fundamentals, Machine Learning 
+Google: Cloud Digital Leader track
+Cisco : Intro to Packet Tracer, Network                   
+Essentials
+Guvi : Ai for India 2.0 
+NPTEL: Python for Data SciencePersonaCache:
+Voice-first AI framework using ElevenLabs agents and RAG-
+powered domain knowledge for hyper-specialized assistants .
+HR Knowledge Assistant:
+Internal chatbot ingesting Google Drive docs via n8n →
+Pinecone →  Google Gemini to deliver precise, policy-based
+answers.
+Retail Analytics System:
+YOLOv8-driven real-time crowd monitoring, customer tracking,
+behavioral insights, peak-time forecasting, and zone
+heatmaps with instant alerts.
+Code Blocks: C Advanced(Dec 2024).
+Tarcin Robotics LLP: Robotics and IOT(Jul 2024).
+Cisco(Virtual): Networking (May 2024).
+Campus Ambassador, Pragyan’24 (NIT Trichy)
+Campus Ambassador, Shaastra’24 (IIT Madras) 
+College-level runner-up, Smart India Hackathon
+2024
+MSME proposal selected at the college level
