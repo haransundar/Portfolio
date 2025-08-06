@@ -193,7 +193,7 @@ export default function Projects() {
                 </div>
               </div>
               
-              <div className="mt-auto flex flex-col sm:flex-row gap-2 sm:gap-3">
+            <div className="mt-auto flex flex-col sm:flex-row gap-2 sm:gap-3">
                 <a href={p.github} target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 hover:underline font-medium text-sm transition-colors">
                   GitHub
                 </a>
@@ -270,7 +270,7 @@ export default function Projects() {
             <div className="mb-4">
               <h4 className="text-sm font-semibold text-gray-600 dark:text-gray-400 mb-3">Technology Stack</h4>
               <div className="flex flex-wrap gap-3">
-                {modal.tech.map(t => (
+              {modal.tech.map(t => (
                   <div key={t} className="relative group/tech">
                     <TechIconFast 
                       tech={t} 
@@ -280,8 +280,8 @@ export default function Projects() {
                     <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-2 py-1 bg-black text-white text-xs rounded opacity-0 group-hover/tech:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap z-10">
                       {t}
                     </div>
-                  </div>
-                ))}
+                </div>
+              ))}
               </div>
             </div>
             
