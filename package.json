@@ -1,0 +1,11 @@
+{
+  "name": "portfolio-root",
+  "version": "1.0.0",
+  "description": "Portfolio project root",
+  "scripts": {
+    "build": "cd portfolio && npm run build",
+    "dev": "cd portfolio && npm run dev",
+    "preview": "cd portfolio && npm run preview"
+  },
+  "private": true
+} 
