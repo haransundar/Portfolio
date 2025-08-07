@@ -6,7 +6,7 @@ export default function Hero() {
       {/* Subtle background image with overlay */}
       <div className="absolute inset-0 z-0">
         <img 
-          src="/hero-bg.jpg" 
+          src="/hero-bg.svg" 
           alt="AI and technology background" 
           className="w-full h-full object-cover opacity-10 dark:opacity-5"
           loading="lazy"
