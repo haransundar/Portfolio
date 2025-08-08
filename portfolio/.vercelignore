@@ -1,0 +1,10 @@
+# Ignore unnecessary files for Vercel deployment
+node_modules/
+.git/
+.gitignore
+README.md
+*.log
+.env
+.env.local
+.DS_Store
+Thumbs.db 
