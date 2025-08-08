@@ -1,0 +1,6 @@
+# Ignore everything except the portfolio directory
+*
+!portfolio/
+!portfolio/**
+!vercel.json
+!.vercelignore 
