@@ -2,6 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Import design tokens */
+@import './styles/design-tokens.css';
+
 /* Floating animation for hero elements */
 @keyframes float {
   0%, 100% {
@@ -32,8 +35,9 @@
 /* Enhanced focus states for accessibility */
 button:focus-visible,
 a:focus-visible {
-  outline: 2px solid #3b82f6;
+  outline: 2px solid var(--color-primary-500);
   outline-offset: 2px;
+  border-radius: var(--radius-md);
 }
 
 /* Custom scrollbar */
@@ -140,4 +144,262 @@ a:focus-visible {
   100% {
     background-position: 0% 50%;
   }
+}
+/* === 2025 DESIGN SYSTEM ENHANCEMENTS === */
+
+/* Organic shapes and modern layouts */
+.organic-blob {
+  border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+  animation: morphing 8s ease-in-out infinite;
+}
+
+@keyframes morphing {
+  0%, 100% {
+    border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+  }
+  25% {
+    border-radius: 58% 42% 75% 25% / 76% 46% 54% 24%;
+  }
+  50% {
+    border-radius: 50% 50% 33% 67% / 55% 27% 73% 45%;
+  }
+  75% {
+    border-radius: 33% 67% 58% 42% / 63% 68% 32% 37%;
+  }
+}
+
+/* Modern card hover effects */
+.card-modern {
+  transition: all var(--duration-normal) var(--ease-elastic);
+  transform-style: preserve-3d;
+}
+
+.card-modern:hover {
+  transform: translateY(-12px) rotateX(5deg) rotateY(2deg);
+  box-shadow: var(--shadow-2xl), var(--shadow-primary);
+}
+
+/* Magnetic button effect */
+.btn-magnetic {
+  position: relative;
+  transition: all var(--duration-normal) var(--ease-back);
+}
+
+.btn-magnetic:hover {
+  transform: scale(1.05) translateY(-2px);
+}
+
+.btn-magnetic::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  background: var(--gradient-primary-vibrant);
+  border-radius: inherit;
+  opacity: 0;
+  transition: opacity var(--duration-normal);
+  z-index: -1;
+}
+
+.btn-magnetic:hover::before {
+  opacity: 0.2;
+}
+
+/* Text reveal animations */
+.text-reveal {
+  overflow: hidden;
+  position: relative;
+}
+
+.text-reveal::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--color-primary-500);
+  transform: translateX(-100%);
+  transition: transform var(--duration-slow) var(--ease-elastic);
+}
+
+.text-reveal.animate::after {
+  transform: translateX(100%);
+}
+
+/* Parallax container */
+.parallax-container {
+  transform-style: preserve-3d;
+  perspective: 1000px;
+}
+
+.parallax-element {
+  transform: translateZ(0);
+  will-change: transform;
+}
+
+/* Smooth scroll behavior */
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* Enhanced loading states */
+.loading-shimmer {
+  background: linear-gradient(
+    90deg,
+    var(--color-neutral-200) 25%,
+    var(--color-neutral-100) 50%,
+    var(--color-neutral-200) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* Modern scrollbar with design tokens */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-neutral-100);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-neutral-400);
+  border-radius: var(--radius-full);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-primary-500);
+}
+
+/* Dark mode scrollbar */
+.dark ::-webkit-scrollbar-track {
+  background: var(--color-neutral-800);
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: var(--color-neutral-600);
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: var(--color-primary-400);
+}
+
+/* Improved hero gradient with design tokens */
+.hero-gradient-modern {
+  background: var(--gradient-mesh-1);
+  background-size: 400% 400%;
+  animation: gradientShift 15s ease infinite;
+}
+
+/* Interactive elements with micro-animations */
+.interactive-element {
+  transition: all var(--duration-fast) var(--ease-out);
+  cursor: pointer;
+}
+
+.interactive-element:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-lg);
+}
+
+.interactive-element:active {
+  transform: translateY(0);
+  transition-duration: var(--duration-instant);
+}
+
+/* Typography enhancements */
+.text-balance {
+  text-wrap: balance;
+}
+
+.text-pretty {
+  text-wrap: pretty;
+}
+
+/* Focus-visible improvements */
+.focus-ring {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+  transition: outline-color var(--duration-fast);
+}
+
+.focus-ring:focus-visible {
+  outline-color: var(--color-primary-500);
+}
+
+/* Skip link for accessibility */
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 6px;
+  background: var(--color-primary-500);
+  color: white;
+  padding: 8px;
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  z-index: var(--z-skiplink);
+  transition: top var(--duration-fast);
+}
+
+.skip-link:focus {
+  top: 6px;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .card-modern:hover {
+    outline: 2px solid var(--color-primary-500);
+  }
+  
+  .btn-magnetic:hover {
+    outline: 2px solid var(--color-secondary-500);
+  }
+}
+
+/* Print styles */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* Container queries support */
+@container (min-width: 768px) {
+  .container-responsive {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-lg);
+  }
+}
+
+/* Modern selection styling */
+::selection {
+  background: var(--color-primary-200);
+  color: var(--color-primary-900);
+}
+
+::-moz-selection {
+  background: var(--color-primary-200);
+  color: var(--color-primary-900);
 }
