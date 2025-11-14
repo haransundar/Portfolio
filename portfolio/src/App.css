@@ -1,9 +1,9 @@
+/* Import design tokens */
+@import './styles/design-tokens.css';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-/* Import design tokens */
-@import './styles/design-tokens.css';
 
 /* Floating animation for hero elements */
 @keyframes float {
