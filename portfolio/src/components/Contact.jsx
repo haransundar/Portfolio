@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { motion } from 'framer-motion';
 import { SiGmail, SiLinkedin, SiGithub, SiX } from 'react-icons/si';
 
 const socialLinks = [
@@ -57,11 +58,32 @@ export default function Contact() {
   }
 
   return (
-    <section id="contact" className="mb-16 sm:mb-24">
-      <h2 className="text-2xl sm:text-3xl font-bold mb-6 text-blue-700 dark:text-blue-400">Contact</h2>
+    <motion.section
+      id="contact"
+      className="mb-16 sm:mb-24"
+      initial={{ opacity: 0, y: 40 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.2 }}
+      transition={{ duration: 0.6, ease: 'easeOut' }}
+    >
+      <motion.h2
+        className="text-2xl sm:text-3xl font-bold mb-6 text-blue-700 dark:text-blue-400"
+        initial={{ opacity: 0, y: 10 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+      >
+        Contact
+      </motion.h2>
       <div className="flex flex-col lg:flex-row gap-6 lg:gap-8">
         {/* Contact Form */}
-        <form onSubmit={handleSubmit} className="flex-1 bg-white dark:bg-gray-800 rounded-xl shadow p-4 sm:p-6 flex flex-col gap-4">
+        <motion.form
+          onSubmit={handleSubmit}
+          className="flex-1 bg-white dark:bg-gray-800 rounded-xl shadow p-4 sm:p-6 flex flex-col gap-4 border border-gray-200 dark:border-gray-700"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ delay: 0.1 }}
+        >
           <input
             type="text"
             name="name"
@@ -88,11 +110,24 @@ export default function Contact() {
           />
           {error && <p className="text-red-600 text-xs sm:text-sm">{error}</p>}
           {success && <p className="text-green-600 text-xs sm:text-sm">{success}</p>}
-          <button type="submit" className="px-4 sm:px-6 py-2 bg-blue-600 text-white font-bold rounded-full shadow hover:bg-blue-700 transition-all text-sm sm:text-base">Send Message</button>
-        </form>
+          <motion.button
+            type="submit"
+            className="px-4 sm:px-6 py-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-bold rounded-full shadow hover:from-blue-700 hover:to-purple-700 transition-all text-sm sm:text-base focus-ring self-start"
+            whileHover={{ y: -2 }}
+            whileTap={{ scale: 0.98 }}
+          >
+            Send Message
+          </motion.button>
+        </motion.form>
         {/* Contact Info & Social Links */}
         <div className="flex-1 flex flex-col gap-4 sm:gap-6">
-          <div className="bg-white dark:bg-gray-800 rounded-xl shadow p-4 sm:p-6">
+          <motion.div
+            className="bg-white dark:bg-gray-800 rounded-xl shadow p-4 sm:p-6 border border-gray-200 dark:border-gray-700"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ delay: 0.2 }}
+          >
             <h3 className="text-base sm:text-lg font-semibold text-gray-900 dark:text-white mb-3 sm:mb-4">Contact Information</h3>
             <div className="space-y-2 sm:space-y-3">
               {contactInfo.map(info => (
@@ -102,17 +137,25 @@ export default function Contact() {
                 </div>
               ))}
             </div>
-          </div>
-          <div className="bg-white dark:bg-gray-800 rounded-xl shadow p-4 sm:p-6">
+          </motion.div>
+          <motion.div
+            className="bg-white dark:bg-gray-800 rounded-xl shadow p-4 sm:p-6 border border-gray-200 dark:border-gray-700"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ delay: 0.3 }}
+          >
             <h3 className="text-base sm:text-lg font-semibold text-gray-900 dark:text-white mb-3 sm:mb-4">Connect with me:</h3>
             <div className="grid grid-cols-2 gap-3">
               {socialLinks.map(link => (
-                <a
+                <motion.a
                   key={link.name}
                   href={link.href}
                   target="_blank"
                   rel="noopener noreferrer"
                   className={`flex items-center gap-2 p-3 rounded-lg border border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600 transition-all duration-200 group ${link.color}`}
+                  whileHover={{ y: -3, scale: 1.02 }}
+                  whileTap={{ scale: 0.97 }}
                 >
                   <div className="text-lg group-hover:scale-110 transition-transform duration-200">
                     {link.icon}
@@ -120,12 +163,12 @@ export default function Contact() {
                   <span className="text-sm font-medium text-gray-700 dark:text-gray-300 group-hover:text-gray-900 dark:group-hover:text-white transition-colors">
                     {link.name}
                   </span>
-                </a>
+                </motion.a>
               ))}
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 } 

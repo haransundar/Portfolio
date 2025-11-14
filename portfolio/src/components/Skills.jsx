@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { motion } from 'framer-motion';
 import TechIconFast from './TechIconFast';
 
 const skills = [
@@ -23,17 +24,37 @@ export default function Skills() {
   const [hoveredTech, setHoveredTech] = useState(null);
 
   return (
-    <section id="skills" className="mb-16 sm:mb-24">
-      <h2 className="text-2xl sm:text-3xl font-bold mb-6 text-blue-700 dark:text-blue-400">Skills</h2>
+    <motion.section
+      id="skills"
+      className="mb-16 sm:mb-24"
+      initial={{ opacity: 0, y: 40 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.2 }}
+      transition={{ duration: 0.6, ease: 'easeOut' }}
+    >
+      <motion.h2
+        className="text-2xl sm:text-3xl font-bold mb-6 text-blue-700 dark:text-blue-400"
+        initial={{ opacity: 0, y: 10 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.1 }}
+        viewport={{ once: true }}
+      >
+        Skills
+      </motion.h2>
       
       {/* Fast Skills Grid */}
       <div className="relative min-h-[400px] mb-8">
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 sm:gap-6 justify-center items-center">
           {skills.map((skill, idx) => (
-            <div
+            <motion.div
               key={skill.name}
-              className="group relative flex flex-col items-center gap-3 p-4 sm:p-6 rounded-xl bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm shadow-lg hover:shadow-2xl transition-all duration-500 cursor-pointer border border-gray-200/50 dark:border-gray-700/50 hover:border-blue-300 dark:hover:border-blue-600 hover:scale-105 transform"
+              className="group relative flex flex-col items-center gap-3 p-4 sm:p-6 rounded-xl bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm shadow-lg border border-gray-200/50 dark:border-gray-700/50 cursor-pointer"
               title={`${skill.name} - ${skill.level}`}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ delay: idx * 0.05 }}
+              whileHover={{ y: -6, scale: 1.05 }}
             >
               <div className="relative">
                 <TechIconFast 
@@ -62,13 +83,19 @@ export default function Skills() {
                 <div className="absolute top-4 right-3 w-1 h-1 bg-purple-400 rounded-full animate-ping opacity-75" style={{ animationDelay: '0.5s' }}></div>
                 <div className="absolute bottom-3 left-4 w-1 h-1 bg-green-400 rounded-full animate-ping opacity-75" style={{ animationDelay: '1s' }}></div>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>
 
       {/* Skills Legend */}
-      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 border border-gray-200 dark:border-gray-700">
+      <motion.div
+        className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 border border-gray-200 dark:border-gray-700"
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.2 }}
+        transition={{ delay: 0.2 }}
+      >
         <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Technology Stack</h3>
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
           <div className="flex items-center gap-2">
@@ -88,11 +115,16 @@ export default function Skills() {
             <span className="text-sm text-gray-600 dark:text-gray-400">Cloud & Database</span>
           </div>
         </div>
-      </div>
+      </motion.div>
 
-      <p className="mt-8 text-center text-gray-600 dark:text-gray-400 text-xs sm:text-sm">
+      <motion.p
+        className="mt-8 text-center text-gray-600 dark:text-gray-400 text-xs sm:text-sm"
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true, amount: 0.2 }}
+      >
         Hover over the technology icons to see details. Each icon represents a technology or skill I've mastered.
-      </p>
-    </section>
+      </motion.p>
+    </motion.section>
   );
 } 
