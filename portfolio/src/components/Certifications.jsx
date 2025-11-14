@@ -96,7 +96,7 @@ export default function Certifications() {
             Dynamically pulled from the full repository of certificates to showcase proven expertise across AI, cloud, cybersecurity, design,
             and hands-on workshops.
           </p>
-        </div>
+                </div>
         <div className="flex flex-wrap gap-2">
           {categories.map((category) => (
             <motion.button
@@ -114,7 +114,7 @@ export default function Certifications() {
               {category}
             </motion.button>
           ))}
-        </div>
+              </div>
       </motion.div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
@@ -132,16 +132,16 @@ export default function Certifications() {
             >
               <div className="absolute inset-0 bg-gradient-to-br from-blue-50/50 to-purple-50/30 dark:from-blue-600/5 dark:to-purple-600/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
               <div className="flex items-center justify-between gap-3 mb-4 relative z-10">
-                <div>
+              <div>
                   <p className="text-xs uppercase tracking-[0.3em] text-blue-500 font-semibold">{certificate.category}</p>
                   <h3 className="text-lg sm:text-xl font-bold text-gray-900 dark:text-white leading-tight mt-2 text-pretty">
                     {certificate.title}
                   </h3>
-                </div>
+              </div>
                 <span className="px-3 py-1 rounded-full bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-xs font-semibold text-gray-600 dark:text-gray-300 shadow-sm">
                   {certificate.type === 'pdf' ? 'PDF' : 'Image'}
                 </span>
-              </div>
+            </div>
 
               <motion.div
                 className={cn(
@@ -167,8 +167,8 @@ export default function Certifications() {
                   <div className="text-center px-6 py-8 text-sm text-gray-600 dark:text-gray-300">
                     <p className="font-semibold mb-2">Interactive PDF</p>
                     <p>Open to preview or download the official certificate.</p>
-                  </div>
-                )}
+              </div>
+            )}
               </motion.div>
 
               <div className="mt-5 flex flex-wrap items-center gap-3 relative z-10">
@@ -191,9 +191,9 @@ export default function Certifications() {
                 >
                   Download
                 </motion.a>
-              </div>
+          </div>
             </motion.article>
-          ))}
+        ))}
         </AnimatePresence>
       </div>
 
@@ -242,4 +242,4 @@ export default function Certifications() {
       </AnimatePresence>
     </motion.section>
   );
-}
+} 
