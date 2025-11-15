@@ -20,6 +20,7 @@ const AnimatedText = ({
   onComplete,
   splitBy = 'letter', // 'letter', 'word', 'line'
   preserveSpaces = true,
+  children,
   ...props
 }) => {
   const [isAnimating, setIsAnimating] = useState(false);
@@ -27,8 +28,19 @@ const AnimatedText = ({
   const { canAnimate, isVisible, elementRef } = useAnimation();
   const hasStarted = useRef(false);
 
+  const resolvedText =
+    typeof text === 'string'
+      ? text
+      : typeof children === 'string'
+        ? children
+        : '';
+
   // Split text based on splitBy prop
   const splitText = (text, splitBy) => {
+    if (typeof text !== 'string') {
+      return [];
+    }
+
     switch (splitBy) {
       case 'word':
         return text.split(' ').map((word, index) => ({
@@ -52,7 +64,7 @@ const AnimatedText = ({
     }
   };
 
-  const textParts = splitText(text, splitBy);
+  const textParts = splitText(resolvedText, splitBy);
 
   // Animation variants
   const containerVariants = {
@@ -183,7 +195,7 @@ const AnimatedText = ({
         className={cn('inline-block', className)}
         {...props}
       >
-        {text}
+        {text ?? children}
       </StaticComponent>
     );
   }
