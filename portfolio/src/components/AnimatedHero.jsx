@@ -153,14 +153,26 @@ const AnimatedHero = ({
       {/* Main Content */}
       <div className="relative z-10 max-w-4xl mx-auto text-center">
         {/* Title Animation */}
-        <div className="mb-6">
+        <div className="mb-6 relative">
+          <p
+            aria-hidden="true"
+            className={cn(
+              'absolute inset-0 flex items-center justify-center text-center',
+              'text-6xl sm:text-7xl lg:text-8xl font-display font-black leading-tight tracking-tight',
+              'text-gray-900 dark:text-white transition-opacity duration-500',
+              currentPhase > 0 ? 'opacity-0' : 'opacity-90'
+            )}
+          >
+            {title}
+          </p>
           <AnimatedHeading
             level={1}
             className={cn(
               'text-6xl sm:text-7xl lg:text-8xl',
               'font-display font-black',
               'text-gradient-primary',
-              'leading-tight tracking-tight'
+              'leading-tight tracking-tight',
+              'relative z-10'
             )}
             animation="slideUp"
             staggerDelay={0.08}

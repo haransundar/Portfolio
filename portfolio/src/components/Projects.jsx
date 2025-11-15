@@ -120,8 +120,28 @@ const techFilters = ['All', ...Array.from(new Set(projects.flatMap(p => p.tech))
 
 const sectionVariants = {
   hidden: { opacity: 0, y: 40 },
-  visible: { opacity: 1, y: 0 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6, ease: 'easeOut', staggerChildren: 0.1 },
+  },
 };
+
+const gridVariants = {
+  hidden: { opacity: 0, x: 30 },
+  visible: { opacity: 1, x: 0, transition: { duration: 0.6, ease: 'easeOut' } },
+};
+
+const cardVariants = {
+  hidden: { opacity: 0, y: 30, scale: 0.95 },
+  visible: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.45, ease: 'easeOut' } },
+};
+
+const insightHighlights = [
+  { label: 'AI + Product Launches', value: '12', detail: 'Agents & prototypes shipped to production' },
+  { label: 'Automation Orchestrations', value: '28', detail: 'Workflows & automations crafted end-to-end' },
+  { label: 'Cross-domain Impact', value: '5', detail: 'Industries including cloud, healthcare, and gaming' },
+];
 
 export default function Projects() {
   const [filter, setFilter] = useState('All');
@@ -139,120 +159,141 @@ export default function Projects() {
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, amount: 0.2 }}
-      transition={{ duration: 0.6, ease: 'easeOut' }}
     >
-      <motion.h2
-        className="text-2xl sm:text-3xl font-bold mb-6 text-blue-700 dark:text-blue-400"
-        initial={{ opacity: 0, y: 10 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.1 }}
-        viewport={{ once: true }}
-      >
-        Projects
-      </motion.h2>
-      
-      {/* Enhanced Filters */}
-      <div className="flex flex-wrap gap-2 mb-6 sm:mb-8">
-        {techFilters.map(t => (
-          <motion.button
-            key={t}
-            onClick={() => setFilter(t)}
-            className={`px-4 py-2 rounded-full border font-medium transition-all duration-300 text-sm ${
-              filter === t 
-                ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white border-blue-600 shadow-lg' 
-                : 'bg-white dark:bg-gray-800 text-blue-600 dark:text-blue-300 border-blue-200 dark:border-blue-700 hover:bg-blue-50 dark:hover:bg-gray-700 hover:border-blue-300 dark:hover:border-blue-600'
-            }`}
-            whileHover={{ y: -3 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            {t}
-          </motion.button>
-        ))}
-      </div>
-      
-      {/* Enhanced Project Cards with Screenshots */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-        {filteredProjects.map((p, idx) => (
-          <motion.article
-            key={p.title}
-            className="group bg-white dark:bg-gray-800 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-500 border border-gray-200 dark:border-gray-700 overflow-hidden project-card"
-            initial={{ opacity: 0, y: 30 }}
+      <div className="flex flex-col gap-10 lg:grid lg:grid-cols-[1fr_1.4fr] lg:items-start">
+        <motion.div className="space-y-6" variants={gridVariants}>
+          <motion.h2
+            className="text-3xl sm:text-4xl font-bold text-blue-700 dark:text-blue-300"
+            initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.2 }}
-            transition={{ delay: idx * 0.08 }}
-            whileHover={{ y: -8 }}
+            viewport={{ once: true }}
           >
-            {/* Project Screenshot */}
-            <div className="relative overflow-hidden">
-              <button type="button" className="w-full" onClick={() => setLightboxImage(p)}>
-                <OptimizedImage 
-                  src={p.image} 
-                  alt={p.imageAlt}
-                  className="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-110 cursor-pointer"
-                  loading="lazy"
-                  fallbackSrc="/projects/placeholder-project.svg"
-                />
-              </button>
-              {/* Overlay with zoom icon */}
-              <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center pointer-events-none">
-                <div className="bg-white/90 rounded-full p-2">
-                  <svg className="w-6 h-6 text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" />
-                  </svg>
+            Projects
+          </motion.h2>
+
+          <motion.p
+            className="text-gray-700 dark:text-gray-300 text-sm sm:text-base"
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            Flagship. Experimental. Impact-focused. Browse a curated set of AI, automation, and cloud-native projects built with state-of-the-art tooling and elegant UX.
+          </motion.p>
+
+          <div className="flex flex-wrap gap-2">
+            {techFilters.map((t, idx) => (
+              <motion.button
+                key={t}
+                onClick={() => setFilter(t)}
+                className={`px-4 py-2 rounded-full border text-sm font-semibold focus-ring transition-all duration-300 ${
+                  filter === t
+                    ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white border-transparent shadow-lg'
+                    : 'bg-white dark:bg-gray-800 text-blue-600 dark:text-blue-300 border-blue-200 dark:border-blue-700 hover:border-blue-300 dark:hover:border-blue-600 hover:bg-blue-50 dark:hover:bg-gray-700'
+                }`}
+                whileHover={{ y: -3 }}
+                whileTap={{ scale: 0.95 }}
+                transition={{ delay: idx * 0.04 }}
+              >
+                {t}
+              </motion.button>
+            ))}
+          </div>
+
+          <div className="grid grid-cols-1 gap-4">
+            {insightHighlights.map((highlight, idx) => (
+              <motion.div
+                key={highlight.label}
+                className="rounded-2xl border border-blue-400/40 bg-white/70 dark:bg-gray-900/70 p-5 shadow-lg"
+                custom={idx}
+                variants={gridVariants}
+                transition={{ delay: idx * 0.1 + 0.1 }}
+              >
+                <p className="text-xs uppercase tracking-[0.3em] text-blue-600 font-bold mb-1">{highlight.label}</p>
+                <p className="text-3xl font-black text-gray-900 dark:text-white">{highlight.value}</p>
+                <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">{highlight.detail}</p>
+              </motion.div>
+            ))}
+          </div>
+        </motion.div>
+
+        <motion.div className="grid grid-cols-1 gap-6" variants={gridVariants}>
+          {filteredProjects.map((p, idx) => (
+            <motion.article
+              key={p.title}
+              className="group relative bg-white dark:bg-gray-900 rounded-3xl shadow-2xl border border-gray-200 dark:border-gray-800 overflow-hidden"
+              variants={cardVariants}
+              transition={{ delay: idx * 0.06 }}
+              whileHover={{ y: -6 }}
+            >
+              <div className="relative overflow-hidden rounded-3xl">
+                <button type="button" className="w-full" onClick={() => setLightboxImage(p)}>
+                  <OptimizedImage
+                    src={p.image}
+                    alt={p.imageAlt}
+                    className="w-full h-52 object-cover transition-transform duration-500 group-hover:scale-110 cursor-pointer"
+                    loading="lazy"
+                    fallbackSrc="/projects/placeholder-project.svg"
+                  />
+                </button>
+                <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                <div className="absolute top-4 right-4 rounded-full bg-gradient-to-r from-blue-600 to-purple-600 px-4 py-2 text-xs font-semibold text-white tracking-wide shadow-lg">
+                  {p.tech[0]}
                 </div>
               </div>
-            </div>
-            
-            <div className="p-6 flex flex-col h-full">
-              <h3 className="text-lg sm:text-xl font-bold text-gray-900 dark:text-white mb-3">{p.title}</h3>
-              <p className="text-gray-700 dark:text-gray-300 mb-4 text-sm sm:text-base flex-grow">{p.summary}</p>
-              
-              {/* Fast Technology Stack */}
-              <div className="mb-4">
-                <h4 className="text-sm font-semibold text-gray-600 dark:text-gray-400 mb-3">Technology Stack</h4>
+
+              <div className="p-6 space-y-4">
+                <div>
+                  <h3 className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white">{p.title}</h3>
+                  <p className="text-gray-600 dark:text-gray-300 text-sm mt-1">{p.summary}</p>
+                </div>
+
                 <div className="flex flex-wrap gap-2">
-                  {p.tech.map(t => (
-                    <div key={t} className="relative group/tech">
-                      <TechIconFast 
-                        tech={t} 
-                        className="w-12 h-12" 
-                        onHover={setHoveredTech}
-                      />
-                      {/* Enhanced tooltip */}
-                      <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-2 py-1 bg-black text-white text-xs rounded opacity-0 group-hover/tech:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap z-10">
+                  {p.tech.map((t) => (
+                    <div key={`${p.title}-${t}`} className="relative group/tech">
+                      <TechIconFast tech={t} className="w-12 h-12" onHover={setHoveredTech} />
+                      <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-2 py-1 bg-black text-white text-xs rounded opacity-0 group-hover/tech:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap">
                         {t}
                       </div>
                     </div>
                   ))}
                 </div>
-              </div>
-              
-              <div className="mt-auto flex flex-col sm:flex-row gap-2 sm:gap-3">
-                <a href={p.github} target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 hover:underline font-medium text-sm transition-colors">
-                  GitHub
-                </a>
-                {p.demo !== '#' && (
-                  <a href={p.demo} target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 hover:underline font-medium text-sm transition-colors">
-                    Live Demo
+
+                <div className="flex flex-wrap gap-3">
+                  <a
+                    href={p.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="px-4 py-2 rounded-full bg-white border border-blue-200 text-blue-600 dark:text-blue-300 font-semibold text-sm transition-all duration-200 hover:bg-blue-50 dark:hover:bg-blue-900"
+                  >
+                    GitHub
                   </a>
-                )}
-                <motion.button 
-                  onClick={() => setModal(p)} 
-                  className="px-4 py-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-full font-semibold hover:from-blue-700 hover:to-purple-700 transition-all text-sm shadow-lg focus-ring"
-                  whileHover={{ y: -2 }}
-                  whileTap={{ scale: 0.98 }}
-                >
-                  Learn More
-                </motion.button>
+                  {p.demo !== '#' && (
+                    <a
+                      href={p.demo}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="px-4 py-2 rounded-full bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold text-sm shadow-lg"
+                    >
+                      Live Demo
+                    </a>
+                  )}
+                  <motion.button
+                    onClick={() => setModal(p)}
+                    className="px-4 py-2 rounded-full border border-gray-200 dark:border-gray-700 text-sm font-semibold text-gray-700 dark:text-gray-200 hover:border-blue-400 dark:hover:border-blue-400 transition-all duration-200"
+                    whileHover={{ y: -2, scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                  >
+                    Learn More
+                  </motion.button>
+                </div>
               </div>
-            </div>
-            
-            {/* Enhanced hover glow effect */}
-            <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-blue-400/5 to-purple-400/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
-          </motion.article>
-        ))}
+
+              <div className="absolute inset-0 rounded-3xl bg-gradient-to-r from-blue-400/10 to-purple-400/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+            </motion.article>
+          ))}
+        </motion.div>
       </div>
-      
+
       {/* Lightbox Modal */}
       <AnimatePresence>
         {lightboxImage && (

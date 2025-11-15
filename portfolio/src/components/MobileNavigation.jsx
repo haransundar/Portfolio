@@ -14,6 +14,7 @@ const MobileNavigation = ({
     { id: 'about', label: 'About', href: '#about', icon: '👨‍💻' },
     { id: 'projects', label: 'Projects', href: '#projects', icon: '🚀' },
     { id: 'skills', label: 'Skills', href: '#skills', icon: '⚡' },
+    { id: 'certifications', label: 'Certifications', href: '#certifications', icon: '🎓' },
     { id: 'contact', label: 'Contact', href: '#contact', icon: '📧' },
   ],
   isOpen = false,
