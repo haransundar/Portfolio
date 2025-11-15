@@ -2,7 +2,7 @@ import React, { useMemo, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { cn } from '../utils/design-system';
 
-const certificateFiles = import.meta.glob('../../certifications/*.{pdf,PDF,png,PNG,jpg,JPG,jpeg,JPEG}', {
+const certificateFiles = import.meta.glob('../../Certifications/*.{pdf,PDF,png,PNG,jpg,JPG,jpeg,JPEG}', {
   as: 'url',
   eager: true,
 });
@@ -45,6 +45,11 @@ const categories = ['All', ...Array.from(new Set(certificates.map((cert) => cert
 const sectionAnimation = {
   hidden: { opacity: 0, y: 40 },
   visible: { opacity: 1, y: 0 },
+};
+
+const scrollContainerAnimation = {
+  hidden: { opacity: 0 },
+  visible: { opacity: 1, transition: { staggerChildren: 0.02 } },
 };
 
 const cardAnimation = {
@@ -96,7 +101,7 @@ export default function Certifications() {
             Dynamically pulled from the full repository of certificates to showcase proven expertise across AI, cloud, cybersecurity, design,
             and hands-on workshops.
           </p>
-                </div>
+        </div>
         <div className="flex flex-wrap gap-2">
           {categories.map((category) => (
             <motion.button
@@ -114,87 +119,99 @@ export default function Certifications() {
               {category}
             </motion.button>
           ))}
-              </div>
+        </div>
       </motion.div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-        <AnimatePresence>
-          {filteredCertificates.map((certificate, index) => (
-            <motion.article
-              key={certificate.id}
-              className="relative bg-white dark:bg-gray-900 rounded-2xl p-6 shadow-lg border border-gray-200/60 dark:border-gray-800/60 overflow-hidden group"
-              variants={cardAnimation}
-              initial="hidden"
-              animate="visible"
-              exit="exit"
-              transition={{ duration: 0.35, delay: index * 0.04 }}
-              whileHover={{ y: -6 }}
-            >
-              <div className="absolute inset-0 bg-gradient-to-br from-blue-50/50 to-purple-50/30 dark:from-blue-600/5 dark:to-purple-600/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
-              <div className="flex items-center justify-between gap-3 mb-4 relative z-10">
-              <div>
-                  <p className="text-xs uppercase tracking-[0.3em] text-blue-500 font-semibold">{certificate.category}</p>
-                  <h3 className="text-lg sm:text-xl font-bold text-gray-900 dark:text-white leading-tight mt-2 text-pretty">
-                    {certificate.title}
-                  </h3>
-              </div>
-                <span className="px-3 py-1 rounded-full bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-xs font-semibold text-gray-600 dark:text-gray-300 shadow-sm">
-                  {certificate.type === 'pdf' ? 'PDF' : 'Image'}
-                </span>
-            </div>
-
-              <motion.div
-                className={cn(
-                  'relative rounded-xl border border-dashed border-gray-200 dark:border-gray-700 bg-gray-50/70 dark:bg-gray-800/30 flex items-center justify-center overflow-hidden',
-                  certificate.type === 'image' ? 'h-48' : 'h-40'
-                )}
-                whileHover={certificate.type === 'image' ? { scale: 1.01 } : undefined}
+      <div className="relative">
+        <div className="pointer-events-none absolute inset-y-0 left-0 w-20 bg-gradient-to-r from-white dark:from-gray-950 to-transparent z-10" />
+        <div className="pointer-events-none absolute inset-y-0 right-0 w-20 bg-gradient-to-l from-white dark:from-gray-950 to-transparent z-10" />
+        <motion.div
+          className="flex gap-5 overflow-x-auto pb-4 pl-6 pr-8 snap-x snap-mandatory touch-pan-x no-scrollbar scroll-smooth"
+          variants={scrollContainerAnimation}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+        >
+          <AnimatePresence>
+            {filteredCertificates.map((certificate, index) => (
+              <motion.article
+                key={certificate.id}
+                className="snap-start min-w-[300px] bg-white dark:bg-gray-900 rounded-3xl p-6 shadow-2xl border border-gray-200/70 dark:border-gray-800/70 overflow-hidden group"
+                variants={cardAnimation}
+                initial="hidden"
+                animate="visible"
+                exit="exit"
+                transition={{ duration: 0.4, delay: index * 0.04 }}
+                whileHover={{ y: -5 }}
               >
-                {certificate.type === 'image' ? (
-                  <button
-                    type="button"
-                    className="w-full h-full focus:outline-none"
-                    onClick={() => setActiveCertificate(certificate)}
-                  >
-                    <img
-                      src={certificate.url}
-                      alt={certificate.title}
-                      loading="lazy"
-                      className="object-cover w-full h-full transition-transform duration-500 group-hover:scale-110"
-                    />
-                  </button>
-                ) : (
-                  <div className="text-center px-6 py-8 text-sm text-gray-600 dark:text-gray-300">
-                    <p className="font-semibold mb-2">Interactive PDF</p>
-                    <p>Open to preview or download the official certificate.</p>
-              </div>
-            )}
-              </motion.div>
+                <div className="absolute inset-0 bg-gradient-to-br from-blue-50/50 to-purple-50/30 dark:from-blue-600/5 dark:to-purple-600/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+                <div className="flex flex-col">
+                  <div className="flex items-center justify-between gap-3 mb-4 relative z-10">
+                    <div>
+                      <p className="text-xs uppercase tracking-[0.3em] text-blue-500 font-semibold">{certificate.category}</p>
+                      <h3 className="text-lg sm:text-xl font-bold text-gray-900 dark:text-white leading-tight mt-2 text-pretty">
+                        {certificate.title}
+                      </h3>
+                    </div>
+                    <span className="px-3 py-1 rounded-full bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-xs font-semibold text-gray-600 dark:text-gray-300 shadow-sm">
+                      {certificate.type === 'pdf' ? 'PDF' : 'Image'}
+                    </span>
+                  </div>
 
-              <div className="mt-5 flex flex-wrap items-center gap-3 relative z-10">
-                <motion.a
-                  href={certificate.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="px-4 py-2 rounded-full bg-gradient-to-r from-blue-600 to-purple-600 text-white text-sm font-semibold shadow-lg focus-ring"
-                  whileHover={{ y: -2 }}
-                  whileTap={{ scale: 0.97 }}
-                >
-                  View Credential
-                </motion.a>
-                <motion.a
-                  href={certificate.url}
-                  download
-                  className="px-4 py-2 rounded-full border border-gray-200 dark:border-gray-700 text-sm font-semibold text-gray-700 dark:text-gray-200 hover:border-blue-400 dark:hover:border-blue-400 focus-ring"
-                  whileHover={{ y: -2 }}
-                  whileTap={{ scale: 0.97 }}
-                >
-                  Download
-                </motion.a>
-          </div>
-            </motion.article>
-        ))}
-        </AnimatePresence>
+                  <motion.div
+                    className={cn(
+                      'relative rounded-xl border border-dashed border-gray-200 dark:border-gray-700 bg-gray-50/70 dark:bg-gray-800/30 flex items-center justify-center overflow-hidden',
+                      certificate.type === 'image' ? 'h-48' : 'h-40'
+                    )}
+                    whileHover={certificate.type === 'image' ? { scale: 1.01 } : undefined}
+                  >
+                    {certificate.type === 'image' ? (
+                      <button
+                        type="button"
+                        className="w-full h-full focus:outline-none"
+                        onClick={() => setActiveCertificate(certificate)}
+                      >
+                        <img
+                          src={certificate.url}
+                          alt={certificate.title}
+                          loading="lazy"
+                          className="object-cover w-full h-full transition-transform duration-500 group-hover:scale-110"
+                        />
+                      </button>
+                    ) : (
+                      <div className="text-center px-6 py-8 text-sm text-gray-600 dark:text-gray-300">
+                        <p className="font-semibold mb-2">Interactive PDF</p>
+                        <p>Open to preview or download the official certificate.</p>
+                      </div>
+                    )}
+                  </motion.div>
+
+                  <div className="mt-5 flex flex-wrap items-center gap-3 relative z-10">
+                    <motion.a
+                      href={certificate.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="px-4 py-2 rounded-full bg-gradient-to-r from-blue-600 to-purple-600 text-white text-sm font-semibold shadow-lg focus-ring"
+                      whileHover={{ y: -2 }}
+                      whileTap={{ scale: 0.97 }}
+                    >
+                      View Credential
+                    </motion.a>
+                    <motion.a
+                      href={certificate.url}
+                      download
+                      className="px-4 py-2 rounded-full border border-gray-200 dark:border-gray-700 text-sm font-semibold text-gray-700 dark:text-gray-200 hover:border-blue-400 dark:hover:border-blue-400 focus-ring"
+                      whileHover={{ y: -2 }}
+                      whileTap={{ scale: 0.97 }}
+                    >
+                      Download
+                    </motion.a>
+                  </div>
+                </div>
+              </motion.article>
+            ))}
+          </AnimatePresence>
+        </motion.div>
       </div>
 
       <AnimatePresence>
