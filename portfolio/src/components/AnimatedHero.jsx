@@ -54,6 +54,18 @@ const AnimatedHero = ({
     }
   }, [currentPhase, phases, isComplete, onAnimationComplete]);
 
+  const scrollToSection = (targetId) => {
+    if (typeof document === 'undefined' || typeof window === 'undefined') {
+      return;
+    }
+
+    const targetElement = document.getElementById(targetId);
+    if (targetElement) {
+      const offsetTop = targetElement.getBoundingClientRect().top + window.scrollY - 80;
+      window.scrollTo({ top: offsetTop, behavior: 'smooth' });
+    }
+  };
+
   // Background animation variants
   const backgroundVariants = {
     hidden: { opacity: 0, scale: 0.8 },
@@ -159,8 +171,9 @@ const AnimatedHero = ({
             className={cn(
               'absolute inset-0 flex items-center justify-center text-center',
               'text-6xl sm:text-7xl lg:text-8xl font-display font-black leading-tight tracking-tight',
-              'text-gray-900 dark:text-white transition-opacity duration-500',
-              currentPhase > 0 ? 'opacity-0' : 'opacity-90'
+              'text-gray-900/90 dark:text-white/90 transition-opacity duration-500',
+              'pointer-events-none select-none',
+              currentPhase > 0 ? 'opacity-60' : 'opacity-100'
             )}
           >
             {title}
@@ -258,6 +271,7 @@ const AnimatedHero = ({
             )}
             whileHover={canAnimate ? { scale: 1.05, y: -2 } : {}}
             whileTap={canAnimate ? { scale: 0.98 } : {}}
+            onClick={() => scrollToSection('projects')}
           >
             View My Work
           </motion.button>

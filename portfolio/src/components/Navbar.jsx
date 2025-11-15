@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import FloatingNavigation from './FloatingNavigation';
 
 const navItems = [
@@ -10,21 +10,44 @@ const navItems = [
   { id: 'contact', label: 'Contact', href: '#contact' },
 ];
 
+const getPreferredTheme = () => {
+  if (typeof window === 'undefined') {
+    return 'light';
+  }
+
+  const saved = localStorage.getItem('theme');
+  if (saved === 'light' || saved === 'dark') {
+    return saved;
+  }
+
+  return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+};
+
 export default function Navbar() {
-  const [darkMode, setDarkMode] = useState(() => {
-    return localStorage.getItem('theme') === 'dark' ||
-      (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches);
+  const [theme, setTheme] = useState(() => {
+    if (typeof window === 'undefined') {
+      return 'light';
+    }
+
+    return getPreferredTheme();
   });
 
   useEffect(() => {
-    if (darkMode) {
-      document.documentElement.classList.add('dark');
-      localStorage.setItem('theme', 'dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-      localStorage.setItem('theme', 'light');
+    setTheme(getPreferredTheme());
+  }, []);
+
+  useEffect(() => {
+    if (typeof document === 'undefined') {
+      return;
     }
-  }, [darkMode]);
+
+    document.documentElement.classList.toggle('dark', theme === 'dark');
+    localStorage.setItem('theme', theme);
+  }, [theme]);
+
+  const toggleTheme = useCallback(() => {
+    setTheme((prev) => (prev === 'dark' ? 'light' : 'dark'));
+  }, []);
 
   return (
     <>
@@ -38,11 +61,11 @@ export default function Navbar() {
       {/* Dark Mode Toggle - Fixed position */}
       <div className="fixed top-4 right-4 z-toast">
         <button
-          onClick={() => setDarkMode(!darkMode)}
+          onClick={toggleTheme}
           className="p-3 rounded-full glass-medium border border-white/20 shadow-lg hover:shadow-xl transition-all duration-normal focus-ring"
           aria-label="Toggle dark mode"
         >
-          {darkMode ? (
+          {theme === 'dark' ? (
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5 text-yellow-400">
               <path strokeLinecap="round" strokeLinejoin="round" d="M21.752 15.002A9.718 9.718 0 0112 21.75c-5.385 0-9.75-4.365-9.75-9.75 0-4.136 2.664-7.64 6.418-9.093a.75.75 0 01.908.911A7.501 7.501 0 0019.84 14.09a.75.75 0 01.911.912z" />
             </svg>
