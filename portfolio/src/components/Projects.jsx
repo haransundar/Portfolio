@@ -1,5 +1,5 @@
 import React from 'react';
-import { motion } from 'framer-motion';
+import { motion, useInView } from 'framer-motion';
 import { cn } from '../utils/design-system';
 
 const highlightStats = [
@@ -301,24 +301,27 @@ const projectSections = [
 ];
 
 const sectionVariants = {
-  hidden: { opacity: 0, y: 30 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: 'easeOut', staggerChildren: 0.08 } },
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: 'easeOut', staggerChildren: 0.06 } },
 };
 
 const cardVariants = {
-  hidden: { opacity: 0, y: 20, scale: 0.98 },
-  visible: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.45, ease: 'easeOut' } },
+  hidden: { opacity: 0, y: 15, scale: 0.98 },
+  visible: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.4, ease: 'easeOut' } },
 };
 
 export default function Projects() {
+  const sectionRef = React.useRef(null);
+  const isInView = useInView(sectionRef, { once: true, amount: 0.05, margin: "0px 0px -200px 0px" });
+
   return (
     <motion.section
+      ref={sectionRef}
       id="projects"
       className="relative mb-24 space-y-12 rounded-[32px] border border-white/30 bg-gradient-to-br from-white via-white/80 to-neutral-50/80 dark:from-neutral-900/70 dark:via-neutral-900/75 dark:to-neutral-950/90 p-6 sm:p-8 shadow-[0_40px_120px_rgba(15,23,42,0.45)] overflow-hidden"
       variants={sectionVariants}
       initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, amount: 0.15 }}
+      animate={isInView ? "visible" : "hidden"}
     >
       <span className="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-br from-white/0 via-white/40 to-white/0 dark:from-black/50 dark:via-black/80 dark:to-black/0" aria-hidden="true" />
       <motion.div className="relative z-10 space-y-6" variants={cardVariants}>
