@@ -3,10 +3,10 @@ import { motion, useInView } from 'framer-motion';
 import { cn } from '../utils/design-system';
 
 const highlightStats = [
-  { label: 'Repositories', value: '17', detail: 'Active GitHub repositories', accent: 'from-blue-500 to-indigo-500' },
-  { label: 'Individual Projects', value: '63', detail: 'Curated portfolio inventory', accent: 'from-purple-500 to-pink-500' },
-  { label: 'Live Deployments', value: '28+', detail: 'Production & demo sites', accent: 'from-emerald-500 to-teal-500' },
-  { label: 'Domains', value: 'AI · IoT · Automation', detail: 'Full-stack + embedded expertise', accent: 'from-amber-500 to-orange-500' },
+  { label: 'Repositories', value: '17', detail: 'Active GitHub repositories', accent: 'from-blue-500 to-blue-600' },
+  { label: 'Individual Projects', value: '63', detail: 'Curated portfolio inventory', accent: 'from-purple-500 to-purple-600' },
+  { label: 'Live Deployments', value: '28+', detail: 'Production & demo sites', accent: 'from-blue-400 to-purple-500' },
+  { label: 'Domains', value: 'AI · IoT · Automation', detail: 'Full-stack + embedded expertise', accent: 'from-blue-600 to-indigo-600' },
 ];
 
 const projectSections = [
@@ -15,7 +15,7 @@ const projectSections = [
     title: 'Flagship & Production-Ready Builds',
     subtitle:
       'Enterprise SaaS, GenAI assistants, and full-stack experiences delivering measurable business outcomes and live demos.',
-    accent: 'from-orange-400 to-rose-500',
+    accent: 'from-blue-500 to-purple-600',
     projects: [
       {
         name: 'SCAP · Supply Chain AI Compliance Platform',
@@ -84,7 +84,7 @@ const projectSections = [
     id: 'ai-ml',
     title: 'AI/ML Repositories',
     subtitle: 'Monorepos and experiments pushing agentic automation, Vertex AI playbooks, and document automation workflows.',
-    accent: 'from-indigo-500 to-sky-500',
+    accent: 'from-blue-600 to-indigo-600',
     projects: [
       {
         name: 'Google-adk · ADK Agent Monorepo',
@@ -126,7 +126,7 @@ const projectSections = [
     title: 'AI-Projects Repository (19 Sub-Projects)',
     subtitle:
       'Breadth-first experimentation with multi-file automation suites and Python scripts spanning vision, robotics, and agent tools.',
-    accent: 'from-fuchsia-500 to-purple-500',
+    accent: 'from-purple-500 to-purple-700',
     projects: [
       {
         name: 'Complex Multi-File Systems (5)',
@@ -178,7 +178,7 @@ const projectSections = [
     title: 'IoT-Projects Repository (27 Sub-Projects)',
     subtitle:
       'Embedded craftsmanship for gesture robotics, smart monitoring, and sensor-driven safety systems.',
-    accent: 'from-emerald-500 to-lime-500',
+    accent: 'from-blue-400 to-blue-600',
     projects: [
       {
         name: 'Robotics & Gesture Control Stack',
@@ -245,7 +245,7 @@ const projectSections = [
     id: 'web',
     title: 'Web Development Collections (3 Repos)',
     subtitle: 'Interactive games, experimental pages, and hackathon builds crafted with JS/HTML/CSS.',
-    accent: 'from-sky-500 to-cyan-500',
+    accent: 'from-indigo-500 to-blue-500',
     projects: [
       {
         name: 'Game & Web Projects',
@@ -265,7 +265,7 @@ const projectSections = [
     id: 'automation',
     title: 'Automation Projects (RPA)',
     subtitle: 'Robotic process automation for finance, HR, and admin workflows.',
-    accent: 'from-amber-500 to-yellow-500',
+    accent: 'from-purple-600 to-indigo-600',
     projects: [
       {
         name: 'RPA-Projects',
@@ -283,7 +283,7 @@ const projectSections = [
     id: 'organization',
     title: 'Organizational & Planning Tools',
     subtitle: 'TypeScript-powered planning hubs and experimental canvases on Replit.',
-    accent: 'from-neutral-500 to-slate-500',
+    accent: 'from-blue-500 to-indigo-500',
     projects: [
       {
         name: 'Planning + Experimental Hubs (3)',
@@ -318,18 +318,17 @@ export default function Projects() {
     <motion.section
       ref={sectionRef}
       id="projects"
-      className="relative mb-24 space-y-12 rounded-[32px] border border-white/30 bg-gradient-to-br from-white via-white/80 to-neutral-50/80 dark:from-neutral-900/70 dark:via-neutral-900/75 dark:to-neutral-950/90 p-6 sm:p-8 shadow-[0_40px_120px_rgba(15,23,42,0.45)] overflow-hidden"
+      className="relative mb-16 sm:mb-24 space-y-8"
       variants={sectionVariants}
       initial="hidden"
       animate={isInView ? "visible" : "hidden"}
     >
-      <span className="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-br from-white/0 via-white/40 to-white/0 dark:from-black/50 dark:via-black/80 dark:to-black/0" aria-hidden="true" />
-      <motion.div className="relative z-10 space-y-6" variants={cardVariants}>
+      <motion.div className="space-y-6" variants={cardVariants}>
         <div>
           <p className="text-xs uppercase tracking-[0.4em] text-blue-500 font-semibold">Project Inventory</p>
-          <h2 className="text-3xl sm:text-4xl font-bold text-neutral-900 dark:text-white">Complete Portfolio Lineup</h2>
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-gray-900 dark:text-white mt-2">Complete Portfolio Lineup</h2>
         </div>
-        <p className="text-neutral-600 dark:text-neutral-300 max-w-3xl">
+        <p className="text-gray-600 dark:text-gray-300 max-w-3xl text-lg">
           Every repository and sub-project has been curated into themed collections with live demos, strategic highlights,
           and animated match indicators so visitors instantly understand the breadth and impact of the work.
         </p>
@@ -337,65 +336,67 @@ export default function Projects() {
           {highlightStats.map((stat) => (
             <motion.div
               key={stat.label}
-              className="relative overflow-hidden rounded-2xl border border-white/0 p-6 shadow-lg bg-white/80 dark:bg-neutral-900/70 backdrop-blur-xl"
+              className="relative overflow-hidden rounded-2xl border border-gray-200/70 dark:border-gray-700/70 p-6 shadow-xl bg-white dark:bg-gray-900"
               variants={cardVariants}
+              whileHover={{ y: -4 }}
             >
-              <span className={cn('absolute inset-0 bg-gradient-to-br opacity-30', stat.accent)} aria-hidden="true" />
+              <div className={cn('absolute inset-0 bg-gradient-to-br opacity-5', stat.accent)} aria-hidden="true" />
               <div className="relative space-y-2">
-                <p className="text-xs uppercase tracking-[0.4em] text-neutral-700 dark:text-neutral-200/70">{stat.label}</p>
-                <p className="text-3xl font-black text-neutral-900 dark:text-white">{stat.value}</p>
-                <p className="text-sm text-neutral-500 dark:text-neutral-300">{stat.detail}</p>
+                <p className="text-xs uppercase tracking-[0.3em] text-gray-500 dark:text-gray-400">{stat.label}</p>
+                <p className="text-3xl font-black text-gray-900 dark:text-white">{stat.value}</p>
+                <p className="text-sm text-gray-600 dark:text-gray-300">{stat.detail}</p>
               </div>
             </motion.div>
           ))}
         </div>
       </motion.div>
 
-      <div className="space-y-16">
+      <div className="space-y-12">
         {projectSections.map((section) => (
           <motion.div key={section.id} className="space-y-6" variants={sectionVariants}>
             <div className="flex flex-col gap-2 md:flex-row md:items-baseline md:justify-between">
               <div className="space-y-2">
-                <p className="text-xs uppercase tracking-[0.4em] text-neutral-500 dark:text-neutral-400 font-semibold">
+                <p className="text-xs uppercase tracking-[0.3em] text-blue-500 font-semibold">
                   {section.id.replace('-', ' ')}
                 </p>
-                <h3 className="text-2xl font-semibold text-neutral-900 dark:text-white">{section.title}</h3>
+                <h3 className="text-2xl sm:text-3xl font-extrabold text-gray-900 dark:text-white">{section.title}</h3>
               </div>
-              <p className="text-sm text-neutral-500 dark:text-neutral-300 max-w-xl">{section.subtitle}</p>
+              <p className="text-sm text-gray-600 dark:text-gray-400 max-w-xl">{section.subtitle}</p>
             </div>
             <div className="grid gap-6 md:grid-cols-2">
               {section.projects.map((project, idx) => (
                 <motion.article
                   key={`${section.id}-${project.name}`}
-                  className="relative overflow-hidden rounded-3xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 shadow-2xl"
+                  className="group relative overflow-hidden rounded-3xl border border-gray-200/70 dark:border-gray-800/70 bg-white dark:bg-gray-900 shadow-xl hover:shadow-2xl transition-shadow duration-300"
                   variants={cardVariants}
-                  transition={{ delay: idx * 0.08 }}
+                  transition={{ delay: idx * 0.06 }}
+                  whileHover={{ y: -4 }}
                 >
-                  <div className={cn('absolute inset-x-0 top-0 h-1.5', section.accent)} aria-hidden="true" />
+                  <div className={cn('absolute inset-x-0 top-0 h-1', section.accent)} aria-hidden="true" />
+                  <div className="absolute inset-0 bg-gradient-to-br from-blue-50/30 to-purple-50/20 dark:from-blue-600/5 dark:to-purple-600/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
                   <div className="relative flex h-full flex-col gap-4 p-6">
-                    <div className="flex flex-col gap-1">
-                      <p className="text-xs uppercase tracking-[0.3em] text-neutral-400">Match Indicator</p>
+                    <div className="flex flex-col gap-2">
                       <div className="flex flex-wrap items-center gap-2">
-                        <span className="text-sm font-bold text-neutral-900 dark:text-white">{project.name}</span>
+                        <h4 className="text-lg font-bold text-gray-900 dark:text-white">{project.name}</h4>
                         {project.matchScore && (
                           <motion.span
-                            className="inline-flex items-center gap-1 rounded-full bg-emerald-100 px-3 py-1 text-xs font-semibold text-emerald-700 dark:text-emerald-100"
+                            className="inline-flex items-center gap-1 rounded-full bg-emerald-100 dark:bg-emerald-900/30 px-3 py-1 text-xs font-semibold text-emerald-700 dark:text-emerald-300"
                             animate={{ scale: [1, 1.05, 1] }}
                             transition={{ repeat: Infinity, duration: 2 }}
                           >
-                            <span className="h-2 w-2 rounded-full bg-emerald-400" />
+                            <span className="h-2 w-2 rounded-full bg-emerald-500" />
                             {project.matchScore}
                           </motion.span>
                         )}
                       </div>
                     </div>
-                    <p className="text-sm text-neutral-600 dark:text-neutral-300 leading-relaxed">{project.description}</p>
+                    <p className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed">{project.description}</p>
                     {project.tags?.length > 0 && (
                       <div className="flex flex-wrap gap-2">
                         {project.tags.map((tag) => (
                           <span
                             key={tag}
-                            className="rounded-full bg-neutral-100 px-3 py-1 text-xs font-medium text-neutral-700 dark:bg-neutral-800 dark:text-neutral-200"
+                            className="rounded-full bg-gray-100 dark:bg-gray-800 px-3 py-1 text-xs font-medium text-gray-700 dark:text-gray-300 border border-gray-200 dark:border-gray-700"
                           >
                             {tag}
                           </span>
@@ -403,12 +404,12 @@ export default function Projects() {
                       </div>
                     )}
                     {project.subProjects?.length > 0 && (
-                      <div className="space-y-1">
-                        <p className="text-xs font-semibold uppercase tracking-[0.4em] text-neutral-400">Sub-projects</p>
-                        <div className="grid gap-1 text-xs text-neutral-600 dark:text-neutral-300 max-h-40 overflow-y-auto pr-2">
+                      <div className="space-y-2">
+                        <p className="text-xs font-semibold uppercase tracking-[0.3em] text-gray-500 dark:text-gray-400">Sub-projects</p>
+                        <div className="grid gap-1 text-xs text-gray-600 dark:text-gray-400 max-h-40 overflow-y-auto pr-2 custom-scrollbar">
                           {project.subProjects.map((subproject) => (
                             <div key={subproject} className="flex items-center gap-2">
-                              <span className="block h-px w-4 bg-gradient-to-r from-white to-neutral-200 dark:from-white/70" />
+                              <span className="block h-px w-3 bg-blue-400 dark:bg-blue-500" />
                               <span className="truncate">{subproject}</span>
                             </div>
                           ))}
@@ -416,22 +417,22 @@ export default function Projects() {
                       </div>
                     )}
                     {project.matchHighlights?.length > 0 && (
-                      <ul className="space-y-1 text-xs text-neutral-500 dark:text-neutral-400">
+                      <ul className="space-y-1 text-xs text-gray-600 dark:text-gray-400">
                         {project.matchHighlights.map((highlight) => (
-                          <li key={`${project.name}-${highlight}`}>
-                            <span className="mr-2 text-neutral-400">•</span>
-                            {highlight}
+                          <li key={`${project.name}-${highlight}`} className="flex items-start gap-2">
+                            <span className="text-blue-500 mt-0.5">•</span>
+                            <span>{highlight}</span>
                           </li>
                         ))}
                       </ul>
                     )}
-                    <div className="mt-4 flex flex-wrap gap-3">
+                    <div className="mt-auto pt-4 flex flex-wrap gap-3">
                       {project.links?.github && (
                         <a
                           href={project.links.github}
                           target="_blank"
                           rel="noreferrer"
-                          className="rounded-full border border-neutral-200 px-4 py-2 text-xs font-semibold text-neutral-800 transition-all duration-200 hover:border-blue-500 hover:text-blue-600 dark:border-neutral-700 dark:text-neutral-200 dark:hover:text-blue-300"
+                          className="rounded-full border border-gray-200 dark:border-gray-700 px-4 py-2 text-xs font-semibold text-gray-700 dark:text-gray-300 transition-all duration-200 hover:border-blue-500 hover:text-blue-600 dark:hover:border-blue-400 dark:hover:text-blue-400 focus-ring"
                         >
                           View Repo
                         </a>
@@ -441,7 +442,7 @@ export default function Projects() {
                           href={project.links.demo}
                           target="_blank"
                           rel="noreferrer"
-                          className="rounded-full bg-gradient-to-r from-blue-600 to-purple-600 px-4 py-2 text-xs font-semibold text-white shadow-lg shadow-blue-500/40 transition-all duration-200 hover:brightness-110"
+                          className="rounded-full bg-gradient-to-r from-blue-600 to-purple-600 px-4 py-2 text-xs font-semibold text-white shadow-lg hover:shadow-xl transition-all duration-200 hover:brightness-110 focus-ring"
                         >
                           Live Demo
                         </a>

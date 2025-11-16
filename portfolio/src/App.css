@@ -71,6 +71,37 @@ a:focus-visible {
   background: #64748b;
 }
 
+/* Custom scrollbar for project cards */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: #f1f5f9;
+  border-radius: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+.dark .custom-scrollbar::-webkit-scrollbar-track {
+  background: #1e293b;
+}
+
+.dark .custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #475569;
+}
+
+.dark .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #64748b;
+}
+
 /* Loading skeleton for images */
 .image-skeleton {
   background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
