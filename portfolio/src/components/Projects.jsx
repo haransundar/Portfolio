@@ -314,13 +314,14 @@ export default function Projects() {
   return (
     <motion.section
       id="projects"
-      className="mb-24 space-y-12"
+      className="relative mb-24 space-y-12 rounded-[32px] border border-white/30 bg-gradient-to-br from-white via-white/80 to-neutral-50/80 dark:from-neutral-900/70 dark:via-neutral-900/75 dark:to-neutral-950/90 p-6 sm:p-8 shadow-[0_40px_120px_rgba(15,23,42,0.45)] overflow-hidden"
       variants={sectionVariants}
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, amount: 0.2 }}
+      viewport={{ once: true, amount: 0.15 }}
     >
-      <motion.div className="space-y-6" variants={cardVariants}>
+      <span className="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-br from-white/0 via-white/40 to-white/0 dark:from-black/50 dark:via-black/80 dark:to-black/0" aria-hidden="true" />
+      <motion.div className="relative z-10 space-y-6" variants={cardVariants}>
         <div>
           <p className="text-xs uppercase tracking-[0.4em] text-blue-500 font-semibold">Project Inventory</p>
           <h2 className="text-3xl sm:text-4xl font-bold text-neutral-900 dark:text-white">Complete Portfolio Lineup</h2>

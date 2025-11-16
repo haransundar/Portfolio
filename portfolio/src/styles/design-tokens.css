@@ -235,6 +235,26 @@
   }
 }
 
+:root.dark {
+  /* Mirror dark mode colors when toggle is active */
+  --color-neutral-50: #0c0a09;
+  --color-neutral-100: #1c1917;
+  --color-neutral-200: #292524;
+  --color-neutral-300: #44403c;
+  --color-neutral-400: #57534e;
+  --color-neutral-500: #78716c;
+  --color-neutral-600: #a8a29e;
+  --color-neutral-700: #d6d3d1;
+  --color-neutral-800: #e7e5e4;
+  --color-neutral-900: #f5f5f4;
+  --color-neutral-950: #fafaf9;
+
+  /* Mirror glass shadows for dark mode */
+  --glass-light: rgba(0, 0, 0, 0.1);
+  --glass-medium: rgba(0, 0, 0, 0.2);
+  --glass-strong: rgba(0, 0, 0, 0.3);
+}
+
 /* === ACCESSIBILITY === */
 
 /* Respect user's motion preferences */
